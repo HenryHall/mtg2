@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Test</title>
+  </head>
+  <body>
+
+    <div ng-controller="cardController">
+      <p>A thing</p>
+
+      <!-- Create the data base -->
+      <!-- <button type="button" ng-click="doIt();" name="button">Click me!</button> -->
+
+    </div>
+
+    <div ng-controller="cardDisplay">
+
+      <!-- Demo: Small -->
+      <!-- <img class="mtgCard" ng-src="{{getCard('Control Magic')}}"/> -->
+      <button type="button" ng-click="getCard('Control Magic')" name="button">Get a card.</button>
+
+    </div>
+
+
+    <script src="./vendors/angular.min.js" charset="utf-8"></script>
+    <script src="./scripts/script.js" charset="utf-8"></script>
+
+    </script>
+  </body>
+</html>
