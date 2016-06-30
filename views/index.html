@@ -17,8 +17,18 @@
     <div ng-controller="cardDisplay">
 
       <!-- Demo: Small -->
-      <!-- <img class="mtgCard" ng-src="{{getCard('Control Magic')}}"/> -->
-      <button type="button" ng-click="getCard('Control Magic')" name="button">Get a card.</button>
+      <div style="display: inline-block">
+        <p>Small, Hard-code me!</p>
+        <img class="mtgCard" src="{{displayCard}}" ng-init="getCard('Control Magic')" ng-style=divStyle1/>
+      </div>
+
+      <!-- Demo: Medium -->
+      <div ng-style=divStyle2 style="display: inline-block">
+        <span>Medium</span><br/>
+        <input type="text" name="name" placeholder="Card Name" value="" ng-model="searchIn"><br/>
+        <button type="button" ng-click="getCard('')" ng-style="buttonStyle">Get a card.</button>
+        <img class="mtgCard" src="{{displayCard}}" ng-style=imgStyle/>
+      </div>
 
     </div>
 
