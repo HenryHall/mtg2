@@ -6,28 +6,34 @@
   </head>
   <body>
 
-    <div ng-controller="cardController">
-      <p>A thing</p>
-
+    <!-- <div ng-controller="cardController"> -->
       <!-- Create the data base -->
       <!-- <button type="button" ng-click="doIt();" name="button">Click me!</button> -->
-
-    </div>
+    <!-- </div> -->
 
     <div ng-controller="cardDisplay">
 
-      <!-- Demo: Small -->
-      <div style="display: inline-block">
-        <p>Small, Hard-code me!</p>
-        <img class="mtgCard" src="{{displayCard}}" ng-init="getCard('Control Magic')" ng-style=divStyle1/>
+      <!-- Demo: Text -->
+      <div>
+        <p>Text Demo: Hover</p>
+        <!-- Enter Cardname Here -->
+        <span ng-init="textImg='Control Magic'"></span>
+        <img ng-cloak style="position: absolute" ng-src="{{displayCard}}" ng-init="getCard({{textImg}})" ng-show="hover" ng-style="divStyle0"/>
+        <span style="color:blue; font-weight:strong" ng-mouseenter="hover= true" ng-mouseleave="hover= false">{{textImg}}</span><br/>
       </div>
+
+      <!-- Demo: Small -->
+      <!-- <div style="display: inline-block">
+        <p>Small Demo:, Hard-code me!</p>
+        <img src="{{displayCard}}" ng-init="getCard('Control Magic')" ng-style="divStyle1"/>
+      </div> -->
 
       <!-- Demo: Medium -->
       <div ng-style=divStyle2 style="display: inline-block">
-        <span>Medium</span><br/>
+        <span>Medium Demo:</span><br/>
         <input type="text" name="name" placeholder="Card Name" value="" ng-model="searchIn"><br/>
         <button type="button" ng-click="getCard('')" ng-style="buttonStyle">Get a card.</button>
-        <img class="mtgCard" src="{{displayCard}}" ng-style=imgStyle/>
+        <img class="mtgCard" ng-src="{{displayCard}}" ng-style=imgStyle/>
       </div>
 
     </div>

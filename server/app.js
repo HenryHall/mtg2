@@ -39,8 +39,10 @@ var mtgSchema = new  mongoose.Schema({
         for(var j=0; j<setList[i].cards.length; j++){
           console.log("Looking at: " + setList[i].cards[j].name);
           if(setList[i].cards[j].name.toLowerCase() == cardKey){
-            console.log("Found the requested card!");
-            res.send(setList[i].cards[j]);
+            if(setList[i].cards[j].multiverseid !== undefined) {
+              console.log("Found the requested card!");
+              res.send(setList[i].cards[j]);
+            }
           }
         }
       }
