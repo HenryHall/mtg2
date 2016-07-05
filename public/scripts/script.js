@@ -7,14 +7,14 @@ var FillText = document.registerElement('fill-text', {
 
 
 //Append stylesheet
-var head = document.head
-  , link = document.createElement('link');
-
-link.type = 'text/css';
-link.rel = 'stylesheet';
-link.href = 'https://raw.githubusercontent.com/HenryHall/mtg2/master/public/style.css';
-
-head.appendChild(link);
+// var head = document.head
+//   , link = document.createElement('link');
+//
+// link.type = 'text/css';
+// link.rel = 'stylesheet';
+// link.href = 'https://raw.githubusercontent.com/HenryHall/mtg2/master/public/style.css';
+//
+// head.appendChild(link);
 
 
 

@@ -3,19 +3,11 @@
   <head>
     <meta charset="utf-8">
     <title>Test</title>
+    <link rel="stylesheet" href="https://rawgit.com/HenryHall/mtg2/master/public/style.css" media="screen" title="no title" charset="utf-8">
   </head>
   <body>
 
-    <h1 id="testID">Css Test</h1>
-
     <div ng-controller="cardDisplay">
-
-      <!-- Demo: Text -->
-      <!-- <div>
-        <p>Text Demo: Hover</p>
-        <img ng-cloak style="position: absolute" ng-src="{{displayCard}}" ng-init="getCard(textImg='Control Magic')" ng-show="hover" ng-style="divStyle0"/>
-        <span style="color:blue; font-weight:strong" ng-mouseenter="hover= true" ng-mouseleave="hover= false">{{textImg}}</span><br/>
-      </div> -->
 
       <!-- Demo: Small -->
       <!-- <div style="display: inline-block">
@@ -24,11 +16,11 @@
       </div> -->
 
       <!-- Demo: Medium -->
-      <div ng-style=divStyle2 style="display: inline-block">
+      <div class='divStyle2' style="display: inline-block">
         <span>Medium Demo:</span><br/>
         <input type="text" name="name" placeholder="Card Name" value="" ng-model="searchIn"><br/>
-        <button type="button" ng-click="getCard('')" ng-style="buttonStyle">Get a card.</button>
-        <img class="mtgCard" ng-src="{{displayCard}}" ng-style=imgStyle/>
+        <button type="button" ng-click="getCard('')" class="buttonStyle">Get a card.</button>
+        <img ng-src="{{displayCard}}" class=imgStyle/>
       </div>
 
       <p>This is a card I would like to talk about.  It's name is <mtg-text>Verdant Catacombs</mtg-text> and I am very excited to share it with you.</p>
