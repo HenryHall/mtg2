@@ -35,9 +35,9 @@ var mtgSchema = new  mongoose.Schema({
     cardlists.find().then(function(setList){
       console.log("Got " + setList.length + " sets.");
       for(var i=0; i<setList.length; i++){
-        console.log("Looking in set: " + setList[i].name);
+        // console.log("Looking in set: " + setList[i].name);
         for(var j=0; j<setList[i].cards.length; j++){
-          console.log("Looking at: " + setList[i].cards[j].name);
+          // console.log("Looking at: " + setList[i].cards[j].name);
           if(setList[i].cards[j].name.toLowerCase() == cardKey){
             if(setList[i].cards[j].multiverseid !== undefined) {
               console.log("Found the requested card!");
