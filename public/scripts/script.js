@@ -5,6 +5,20 @@ var FillText = document.registerElement('fill-text', {
   prototype: Object.create(HTMLElement.prototype)
 });
 
+
+//Append stylesheet
+var head = document.head
+  , link = document.createElement('link');
+
+link.type = 'text/css';
+link.rel = 'stylesheet';
+link.href = 'https://raw.githubusercontent.com/HenryHall/mtg2/master/public/style.css';
+
+head.appendChild(link);
+
+
+
+
 var myApp=angular.module( 'myApp', [] );
 
 myApp.controller( 'cardDisplay', ['$scope', '$http', '$compile', function($scope, $http, $compile){
@@ -55,7 +69,7 @@ myApp.controller( 'cardDisplay', ['$scope', '$http', '$compile', function($scope
 
     $scope.getCard(currentCard, i);
 
-    elements[i].innerHTML = "<span ng-mouseenter='hover=true' ng-mouseleave='hover=false'><span ng-style='divstyle0'>" + currentCard + "</span><img ng-style='imgStyle' ng-show='hover' ng-src='{{displayCard}}'/></span>";
+    elements[i].innerHTML = "<span ng-mouseenter='hover=true' ng-mouseleave='hover=false'><span class='divstyle0'>" + currentCard + "</span><img class='imgStyle' ng-show='hover' ng-src='{{displayCard}}'/></span>";
     // elements[i].innerHTML = "<span ng-mouseenter='showPopover($event)' ng-mouseleave='showPopover()'><span ng-style='divstyle0'>" + currentCard + "</span><img ng-style='{left:field.left,top:field.top}' ng-show='hover' ng-src='{{displayCard}}'/></span>";
 
     $compile(elements[i])($scope);
