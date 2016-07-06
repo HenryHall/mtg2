@@ -1,12 +1,8 @@
-#testID {
-  color: #949494;
-  font-size: 4em;
-}
-
 
 .divstyle0 {
   color: #4444FF;
   font-weight: bold;
+  position: relative;
 }
 
 .divStyle2 {
@@ -18,7 +14,6 @@
 }
 
 .buttonStyle  {
-
   -moz-box-shadow: inset 0px 1px 0px 0px #bee2f9;
   -webkit-box-shadow : inset 0px 1px 0px 0px #bee2f9;
   box-shadow: inset 0px 1px 0px 0px #bee2f9;
@@ -63,6 +58,13 @@
 }
 
 .imgStyle  {
+  display: none;
   position: absolute;
   z-index: 100;
+  top: 1em;
+  left: -50px;
+}
+
+.divstyle0:hover .imgStyle {
+  display: block;
 }

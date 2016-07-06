@@ -2,7 +2,8 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 app.use( bodyParser.json({limit: '50mb'}) );
-// app.use(bodyParser.urlencoded({extended: false}));
+// xmlparser = require('express-xml-bodyparser');
+// app.use(xmlparser());
 var path = require('path');
 var mongoose = require('mongoose');
 mongoose.connect('localhost:27017/mtgApp');
@@ -27,6 +28,9 @@ var mtgSchema = new  mongoose.Schema({
   });
 
   app.post( '/getCard', function(req, res){
+    console.log(req.body);
+    console.dir(req.body);
+    console.log(req.header);
     console.log("Trying to find: " + req.body.name);
     cardKey = req.body.name.toLowerCase();
     // var query = cardlists.findOne({name: "Limited Edition Alpha"});
@@ -50,15 +54,4 @@ var mtgSchema = new  mongoose.Schema({
 
 
     // res.send("done with: " + req.body.name);
-  });
-
-  app.post('/createData', function(req, res){
-    console.log("/createData got: " + req.body.name);
-
-    var newCard = req.body;
-
-    var newRecord = cardlists(newCard);
-    newRecord.save();
-    console.log(newRecord.name + " newRecord");
-    res.send("db Created");
   });
