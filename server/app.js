@@ -28,14 +28,8 @@ var mtgSchema = new  mongoose.Schema({
   });
 
   app.post( '/getCard', function(req, res){
-    console.log(req.body);
-    console.dir(req.body);
-    console.log(req.header);
     console.log("Trying to find: " + req.body.name);
     cardKey = req.body.name.toLowerCase();
-    // var query = cardlists.findOne({name: "Limited Edition Alpha"});
-    // cardlists.findOne({name: "Shadows Over Innistrad"}).then(function(data){res.send(data)});
-    // cardlists.findOne({name: "Ice Age"}).then(function(data){res.send(data)});
     cardlists.find().then(function(setList){
       console.log("Got " + setList.length + " sets.");
       for(var i=0; i<setList.length; i++){
@@ -45,6 +39,7 @@ var mtgSchema = new  mongoose.Schema({
           if(setList[i].cards[j].name.toLowerCase() == cardKey){
             if(setList[i].cards[j].multiverseid !== undefined) {
               console.log("Found the requested card!");
+              console.log("sending: " + setList[i].cards[j].name);
               res.send(setList[i].cards[j]);
             }
           }

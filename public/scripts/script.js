@@ -48,24 +48,18 @@ myApp.controller( 'cardDisplay', ['$scope', '$http', '$compile', function($scope
       //Start XML Request
       var returnedCard;
       var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
-      xmlhttp.open("POST", "/getCard", true);
+      xmlhttp.open("POST", "/getCard", false);
       xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
       xmlhttp.send(JSON.stringify(cardToSend));
 
-      xmlhttp.onreadystatechange = function() {
-        if(xmlhttp.readyState === 4) {
-          console.log("ready");
           if(xmlhttp.status === 200) {
-            returnedCard = JSON.parse(this.responseText);
+            returnedCard = JSON.parse(xmlhttp.responseText);
             console.log(returnedCard);
             console.log(cardElement);
             var cardURL = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=" + returnedCard.multiverseid + "&type=card";
             cardElement.innerHTML = "<span class='divstyle0'>" + cardName + "<img class='imgStyle' src='" + cardURL + "'/></span>";
-            // $compile(cardElement)($scope);
           } else {
             console.log("fail");
-          }
-        }
       };//End XML
     }//End For
 
