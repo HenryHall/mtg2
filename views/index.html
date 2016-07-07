@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html ng-app="myApp">
+<html>
   <head>
     <meta charset="utf-8">
-    <title>Test</title>
+    <title>Your API Here</title>
+
+    <!-- This is only for develepment, it can be swapped for the stylesheet in script.js -->
     <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
   </head>
   <body>
-
-    <div ng-controller="cardDisplay">
 
       <!-- Demo: Small -->
       <!-- <div style="display: inline-block">
@@ -16,12 +16,8 @@
       </div> -->
 
       <!-- Demo: Medium -->
-      <div class='divStyle2' style="display: inline-block">
-        <span>Medium Demo:</span><br/>
-        <input type="text" name="name" placeholder="Card Name" value="" ng-model="searchIn"><br/>
-        <button type="button" ng-click="getCard('')" class="buttonStyle">Get a card.</button>
-        <img ng-src="{{displayCard}}" class=imgStyle/>
-      </div>
+      <mtg-search>Fireball</mtg-search>
+      <mtg-search></mtg-search>
 
       <!-- Demo: Text -->
       <p>This is a card I would like to talk about.  It's name is <mtg-text>Batterskull</mtg-text> and I am very excited to share it with you.</p>
@@ -30,11 +26,13 @@
 
       <p>This is another card I would like to talk about.  It's name is <mtg-text>Giant Growth</mtg-text> and I am very excited to share it with you.</p>
 
+      <mtg-img>Eternal Witness</mtg-img>
+      <mtg-img>Sword of Feast and Famine</mtg-img>
+
 
     </div>
 
 
-    <script src="./vendors/angular.min.js" charset="utf-8"></script>
     <script src="./scripts/script.js" charset="utf-8"></script>
 
     </script>

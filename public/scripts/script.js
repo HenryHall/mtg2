@@ -1,10 +1,5 @@
 console.log("Card Control sourced");
 
-//Define a new HTML tag
-var FillText = document.registerElement('fill-text', {
-  prototype: Object.create(HTMLElement.prototype)
-});
-
 //Append stylesheet
 // var head = document.head
 //   , link = document.createElement('link');
@@ -17,81 +12,100 @@ var FillText = document.registerElement('fill-text', {
 
 
 
+var getTextCard = function(){
 
-var myApp=angular.module( 'myApp', [] );
-
-myApp.controller( 'cardDisplay', ['$scope', '$http', '$compile', function($scope, $http, $compile){
-
-
-
-  var getCard = function(){
-
-
-    var elements = document.getElementsByTagName('mtg-text');
-    console.log(elements);
-    for (var i=0; i<elements.length; i++){
-      console.log(i);
-      var cardName = elements[i].innerHTML;
-      var cardElement = elements[i];
-      console.log(cardElement);
-
-      if(cardName==''){
-        var cardToSend = {
-          name: $scope.searchIn
-        };
-      } else {
-        var cardToSend = {
-          name: cardName
-        }
-      }
+  var elements = document.getElementsByTagName('mtg-text');
+  for (var i=0; i<elements.length; i++){
+    var cardName = elements[i].innerHTML;
+    var cardElement = elements[i];
+    var cardToSend = {
+      name: cardName
+    }
 
       //Start XML Request
-      var returnedCard;
-      var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
-      xmlhttp.open("POST", "/getCard", false);
-      xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-      xmlhttp.send(JSON.stringify(cardToSend));
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST", "/getCard", false);
+    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xmlhttp.send(JSON.stringify(cardToSend));
 
-          if(xmlhttp.status === 200) {
-            returnedCard = JSON.parse(xmlhttp.responseText);
-            console.log(returnedCard);
-            console.log(cardElement);
-            var cardURL = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=" + returnedCard.multiverseid + "&type=card";
-            cardElement.innerHTML = "<span class='divstyle0'>" + cardName + "<img class='imgStyle' src='" + cardURL + "'/></span>";
-          } else {
-            console.log("fail");
-      };//End XML
-    }//End For
+        if(xmlhttp.status === 200) {
+          var returnedCard = JSON.parse(xmlhttp.responseText);
+          var cardURL = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=" + returnedCard.multiverseid + "&type=card";
+          cardElement.innerHTML = "<span class='divstyle0'>" + cardName + "<img class='imgStyleText' src='" + cardURL + "'/></span>";
+        } else {
+          console.log("fail");
+        }
+  }//End For
 
+};//End getTextCard
 
-    // $http({
-    //   method: "POST",
-    //   url: "/getCard",
-    //   data: cardToSend
-    // }).then(function(returnedCard){
-    //   console.log(returnedCard.data);
-      // $scope.displayCard = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=" + returnedCard.data.multiverseid + "&type=card";
-    // });
-  };
+var getSearch = function(){
 
-  getCard();
+  //Gather all mtg-search tags
+  var elements = document.getElementsByTagName('mtg-search');
+  for (var i=0; i<elements.length; i++){
+    var cardName = elements[i].innerHTML;
+    var cardElement = elements[i];
+    //Create a fresh searchElement
+    cardElement.innerHTML = "<div class='divStyle2'><input type='text' placeholder='Card Name'><button type='button' onClick='getCard(this.previousSibling.value, this.parentNode.parentNode)' class='buttonStyle'>Get Card Image</button><img class='imgStyleSearch' src='http://media.wizards.com/2016/images/magic/ewhjdgw/jqghxjuhq_backcard_hxsx.png'</div>";
 
+    if(cardName !== ''){//Initialized with a card
+      var searchElement = elements[i];
+      getCard(cardName, cardElement);
+    }
+  }//End For
+};//End getSearch
 
-  // var elements = document.getElementsByTagName('mtg-text');
-  // for (var i=0; i<elements.length; i++){
-  //   var cardName = elements[i].innerHTML;
-  //   var thisCard = null;
-  //   var thisCard = getCard(cardName);
-  //
-  //   // while(thisCard == null){
-  //   //   console.log("looping till ready");
-  //   // }
-  //
-  //   elements[i].innerHTML = "<span class='divstyle0'>" + cardName + "<img class='imgStyle' ng-src='{{displayCard}}'/></span>";
-  //
-  //   $compile(elements[i])($scope);
-  // }
+var getCard = function(cardToGet, currentElement){
+  console.log("cardToGet: " + cardToGet);
+  var cardToSend = {
+    name: cardToGet
+  }
 
+  //Start XML Request
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("POST", "/getCard", false);
+  xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xmlhttp.send(JSON.stringify(cardToSend));
 
+  if(xmlhttp.status === 200) {
+    var returnedCard = JSON.parse(xmlhttp.responseText);
+    var cardURL = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=" + returnedCard.multiverseid + "&type=card";
 
-}]);
+    //This traversing is disgusting, Im so so sorry
+    //Remove the current image and create the new one
+    currentElement.lastChild.lastChild.remove();
+    currentElement.lastChild.innerHTML += "<img class='imgStyleSearch' src='" + cardURL + "'/>";
+  } else {
+    console.log("fail");
+  }
+};//End getCard
+
+var getImage = function(){
+  var elements = document.getElementsByTagName('mtg-img');
+  for (var i=0; i<elements.length; i++){
+
+    var cardToSend = {
+      name: elements[i].innerHTML
+    }
+
+    //Start XML Request
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST", "/getCard", false);
+    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xmlhttp.send(JSON.stringify(cardToSend));
+
+    if(xmlhttp.status === 200) {
+      var returnedCard = JSON.parse(xmlhttp.responseText);
+      var cardURL = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=" + returnedCard.multiverseid + "&type=card";
+
+      elements[i].innerHTML = "<img class='imgStyleSearch' src='" + cardURL + "'/>";
+    } else {
+      console.log("fail");
+    }
+  }//End for
+}//End getImage
+
+getTextCard(); //Find all card text and update
+getSearch(); //Find all of the search boxes
+getImage(); //Find all of the images
