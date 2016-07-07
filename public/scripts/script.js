@@ -29,9 +29,14 @@ var getTextCard = function(){
     xmlhttp.send(JSON.stringify(cardToSend));
 
         if(xmlhttp.status === 200) {
-          var returnedCard = JSON.parse(xmlhttp.responseText);
-          var cardURL = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=" + returnedCard.multiverseid + "&type=card";
-          cardElement.innerHTML = "<span class='divstyle0'>" + cardName + "<img class='imgStyleText' src='" + cardURL + "'/></span>";
+          if(xmlhttp.responseText == "No Card Found!"){
+            var cardURL = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=366433&type=card";
+            cardElement.innerHTML = "<span class='divstyle0'>" + cardName + "<img class='imgStyleText' src='" + cardURL + "'/></span>";
+          } else {
+            var returnedCard = JSON.parse(xmlhttp.responseText);
+            var cardURL = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=" + returnedCard.multiverseid + "&type=card";
+            cardElement.innerHTML = "<span class='divstyle0'>" + cardName + "<img class='imgStyleText' src='" + cardURL + "'/></span>";
+          }
         } else {
           console.log("fail");
         }
@@ -69,13 +74,22 @@ var getCard = function(cardToGet, currentElement){
   xmlhttp.send(JSON.stringify(cardToSend));
 
   if(xmlhttp.status === 200) {
-    var returnedCard = JSON.parse(xmlhttp.responseText);
-    var cardURL = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=" + returnedCard.multiverseid + "&type=card";
 
-    //This traversing is disgusting, Im so so sorry
-    //Remove the current image and create the new one
-    currentElement.lastChild.lastChild.remove();
-    currentElement.lastChild.innerHTML += "<img class='imgStyleSearch' src='" + cardURL + "'/>";
+    if(xmlhttp.responseText == "No Card Found!"){
+      var cardURL = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=366433&type=card";
+      currentElement.lastChild.lastChild.remove();
+      currentElement.lastChild.innerHTML += "<img class='imgStyleSearch' src='" + cardURL + "'/>";
+      } else {
+      var returnedCard = JSON.parse(xmlhttp.responseText);
+      console.log(returnedCard);
+      var cardURL = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=" + returnedCard.multiverseid + "&type=card";
+
+      //This traversing is disgusting, Im so so sorry
+      //Remove the current image and create the new one
+      currentElement.lastChild.lastChild.remove();
+      currentElement.lastChild.innerHTML += "<img class='imgStyleSearch' src='" + cardURL + "'/>";
+      }
+
   } else {
     console.log("fail");
   }
@@ -96,10 +110,17 @@ var getImage = function(){
     xmlhttp.send(JSON.stringify(cardToSend));
 
     if(xmlhttp.status === 200) {
-      var returnedCard = JSON.parse(xmlhttp.responseText);
-      var cardURL = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=" + returnedCard.multiverseid + "&type=card";
 
-      elements[i].innerHTML = "<img class='imgStyleSearch' src='" + cardURL + "'/>";
+      if(xmlhttp.responseText == "No Card Found!"){
+        var cardURL = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=366433&type=card";
+        elements[i].innerHTML = "<img class='imgStyleSearch' src='" + cardURL + "'/>";
+      } else {
+        var returnedCard = JSON.parse(xmlhttp.responseText);
+        console.log(returnedCard);
+        var cardURL = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=" + returnedCard.multiverseid + "&type=card";
+
+        elements[i].innerHTML = "<img class='imgStyleSearch' src='" + cardURL + "'/>";
+        }
     } else {
       console.log("fail");
     }

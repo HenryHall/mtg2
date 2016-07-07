@@ -45,7 +45,10 @@ var mtgSchema = new  mongoose.Schema({
           }
         }
       }
-    }).then(function(){res.send("No Card Found!")});
+    }).then(function(){
+      console.log("No Card Found!");
+      res.send("No Card Found!")
+    });
 
 
     // res.send("done with: " + req.body.name);

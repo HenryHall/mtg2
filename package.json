@@ -2,7 +2,7 @@
   "name": "mtg2",
   "version": "1.0.0",
   "description": "",
-  "main": "angular.min.js",
+  "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/app.js"
